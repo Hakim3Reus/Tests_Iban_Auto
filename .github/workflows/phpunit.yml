@@ -1,32 +1,25 @@
 name: PHPUnit Tests
 
-on:
-  push:
-    branches:
-      - main  # Això farà que el workflow s'executi en cada push a la branca principal (canvia-la si és necessari).
-  pull_request:
-    branches:
-      - main  # Executar els tests en cada PR també.
+on: [push, pull_request]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.2'  # Versió de PHP que utilitzes al teu projecte.
-        extensions: mbstring, xml  # Afegir extensions necessàries
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
 
-    - name: Install Composer dependencies
-      run: |
-        curl -sS https://getcomposer.org/installer | php
-        php composer.phar install
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
 
-    - name: Run PHPUnit tests
-      run: |
-        vendor/bin/phpunit
+      - name: Give execute permissions to PHPUnit
+        run: chmod +x vendor/bin/phpunit
+
+      - name: Run PHPUnit tests
+        run: vendor/bin/phpunit tests/
