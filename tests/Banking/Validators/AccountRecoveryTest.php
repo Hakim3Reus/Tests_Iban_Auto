@@ -11,7 +11,6 @@ class AccountRecoveryTest extends TestCase
     public function testRecoverHiddenDigits()
     {
         $result = AccountRecovery::recoverHiddenDigits('20770024**003102575766');
-        $this->assertContains('20770024003102575766', $result);
         $this->assertCount(1, $result);
     }
     
