@@ -1,0 +1,17 @@
+{
+    "name": "hkm3r/tests-iban",
+    "autoload": {
+        "psr-4": {
+            "Hkm3r\\TestsIban\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Hakim3Reus",
+            "email": "hkm3reus@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^11.5"
+    }
+}
